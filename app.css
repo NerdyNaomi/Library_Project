@@ -1,3 +1,121 @@
+body {
+  background-color: lavender;
+}
+tr {
+    height: 2em;
+}
+
+/* Animation Keys */
+
+@keyframes fadeInMenu {
+  0% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeOutMenu {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+}
+
+/* Purely Animation Modifiers */
+
+.fadeIn {
+  animation: fadeInMenu 200ms ease-out forwards;
+}
+
+.fadeOut {
+  animation: fadeOutMenu 200ms ease-in forwards;
+}
+
+/* Normal Stuff */
+
+.centered-main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
 .favorite {
-    background-color: yellowgreen;
+  background-color: yellowgreen;
+}
+
+.hide {
+  opacity: 0;
+}
+
+.menuCell {
+  position: relative;
+}
+
+.menuButton {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 6px;
+  box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  z-index: 1000;
+  animation: fadeInMenu 200ms ease-in-out forwards;
+  min-width: 160px;
+  transform: scale(0.95);
+  opacity: 0;
+}
+
+.snowmanButton {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  opacity: 0.25;
+  transition: opacity 0.3s;
+}
+
+tr:hover .snowmanButton {
+  opacity: 1;
+}
+
+.menuCell {
+  position: absolute;
+  background: none;
+  padding: 5px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  z-index: 100;
+}
+
+.xmenuCell :hover {
+  background: green;
+}
+
+.menuCell button {
+  background: none;
+  border: none;
+  padding: 5px;
+  text-align: left;
+  cursor: pointer;
+  
+}
+
+.menuCell button:hover {
+  background: rgb(188, 174, 240);
+  opacity: 1;
 }
