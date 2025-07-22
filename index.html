@@ -17,7 +17,8 @@
           </div>
           <div class="form-group">
             <label for="author">Author</label>
-            <input type="text" name="author" id="author" required />
+            <input type="text" name="author" id="author" list="author-list" required />
+            <datalist id="author-list"></datalist>
           </div>
           <div class="form-group">
             <label for="read">Read</label>
@@ -27,6 +28,17 @@
             <button type="submit" id="submitButton">Add Book</button>
           </div>
         </form>
+        <div class="sort-wrapper">
+          <label for="sort">Sort...</label>
+          <select id="sort">
+            <option value="title-asc">Title (A-Z)</option>
+            <option value="title-desc">Title (Z-A)</option>
+            <option value="author-asc">Author (A-Z)</option>
+            <option value="author-desc">Author (Z-A)</option>
+            <option value="read">Read</option>
+            <option value="unread">Unread</option>
+          </select>
+        </div>
         <hr />
         <div id="library">
           <!-- Add table here -->

@@ -20,7 +20,7 @@ tr {
 
 @keyframes fadeOutMenu {
   0% {
-    opacity: 0;
+    opacity: 1;
     transform: scale(1);
   }
   100% {
@@ -29,7 +29,7 @@ tr {
   }
 }
 
-/* Purely Animation Modifiers */
+/* Animation Modifiers */
 
 .fadeIn {
   animation: fadeInMenu 200ms ease-out forwards;
@@ -56,33 +56,41 @@ tr {
   opacity: 0;
 }
 
-.menuCell {
-  position: relative;
-}
-
 .menuButton {
   position: absolute;
-  top: 100%;
-  right: 0;
+  top: -1.7em;
+  right: -7.8em;
   background-color: white;
   border: 1px solid #ccc;
   padding: 10px;
   border-radius: 6px;
   box-shadow: 0 12px 20px rgba(0,0,0,0.15);
-  display: none;
+  display: flex;
   flex-direction: column;
   gap: 8px;
-  z-index: 1000;
+  z-index: 9999;
   animation: fadeInMenu 200ms ease-in-out forwards;
   min-width: 160px;
   transform: scale(0.95);
   opacity: 0;
 }
 
+.menuButton button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 8px 10px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  z-index: 2;
+}
+
 .snowmanButton {
   background: none;
   border: none;
   font-size: 20px;
+  z-index: 3;
   cursor: pointer;
   opacity: 0.25;
   transition: opacity 0.3s;
@@ -93,17 +101,13 @@ tr:hover .snowmanButton {
 }
 
 .menuCell {
-  position: absolute;
+  position: relative;
   background: none;
   padding: 5px;
   height: auto;
   display: flex;
   flex-direction: column;
-  z-index: 100;
-}
-
-.xmenuCell :hover {
-  background: green;
+  z-index: 1;
 }
 
 .menuCell button {
@@ -117,5 +121,26 @@ tr:hover .snowmanButton {
 
 .menuCell button:hover {
   background: rgb(188, 174, 240);
-  opacity: 1;
+  opacity: 3;
+}
+
+.sort-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+  font-family: sans-serif;
+}
+
+.sort-wrapper label {
+  font-weight: bold;
+}
+
+.sort-wrapper select {
+  padding: 6px 12px;
+  font-size: 1rem;
+  border-radius: 4px;
+  border: 1px solid rgb(188, 174, 240);
+  background-color: white;
+  cursor: pointer;
 }

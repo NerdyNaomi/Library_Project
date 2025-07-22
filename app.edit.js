@@ -210,44 +210,57 @@ class Library {
     menu.appendChild(deleteButton);
 
     // Toggle menu button when clicking snowman:
-    // menu.addEventListener(`animationend`, function handleFadeOut(event) {
-    //   console.log(event.animationName);
-    //   if (event.animationName === `fadeOutMenu`) {
-    //     menu.style.display = `none`;
-    //     menu.classList.remove(`fadeOut`);
-    //   }
-    // });
+    menu.addEventListener("animationend", function handleFadeOut(event) {
+      if (event.animationName === "fadeOutMenu") {
+        menu.style.display = "none";
+        menu.classList.remove("fadeOut");
+      }
+    });
 
-    snowmanButton.addEventListener(`click`, (e) => {
+    snowmanButton.addEventListener("click", (e) => {
       e.stopPropagation();
 
-      const isOpen = menu.style.display === `block`;
+      const isOpen = menu.style.display === "block";
 
       if (isOpen) {
-        menu.classList.remove(`fadeIn`);
-        // menu.classList.add(`fadeOut`);
-        // fadeOut is broken :(
-        menu.style.display = `none`;
-        snowmanButton.textContent = `...`;
+        menu.classList.remove("fadeIn");
+
+        // Force reflow to restart animation properly
+        void menu.offsetWidth;
+
+        menu.classList.add("fadeOut");
+        snowmanButton.textContent = "...";
       } else {
-        // menu.classList.remove(`fadeOut`);
-        menu.classList.add(`fadeIn`);
+        menu.classList.remove("fadeOut");
+        menu.classList.add("fadeIn");
 
-        menu.style.display = `block`;
-        snowmanButton.textContent = `✖`;
+        menu.style.display = "block";
+        snowmanButton.textContent = "✖";
 
+        // FULL DISCLOSURE: I struggled with this for weeks and so this section is copy-pasted.
         const outsideClickHandler = (event) => {
           if (!menu.contains(event.target) && event.target !== snowmanButton) {
-            menu.classList.remove(`fadeIn`);
-            menu.style.display = `none`; // ← instant close here too
-            snowmanButton.textContent = `...`;
-            document.removeEventListener(`click`, outsideClickHandler);
+            menu.classList.remove("fadeIn");
+            menu.classList.add("fadeOut");
+            snowmanButton.textContent = "...";
+
+            // Wait for animation end to hide the menu
+            menu.addEventListener("animationend", function hideAfterFade(e) {
+              if (e.animationName === "fadeOutMenu") {
+                menu.style.display = "none";
+                menu.classList.remove("fadeOut");
+                menu.removeEventListener("animationend", hideAfterFade);
+              }
+            });
+
+            document.removeEventListener("click", outsideClickHandler);
           }
         };
 
         setTimeout(() => {
-          document.addEventListener(`click`, outsideClickHandler);
+          document.addEventListener("click", outsideClickHandler);
         }, 0);
+        // End copy-pasted section.
       }
     });
 
